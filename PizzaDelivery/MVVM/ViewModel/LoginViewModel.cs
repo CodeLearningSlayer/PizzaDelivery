@@ -16,7 +16,7 @@ namespace PizzaDelivery.MVVM.ViewModel
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
-        //
+        
         private IUserRepository userRepository;
 
         public string Username {
@@ -48,7 +48,6 @@ namespace PizzaDelivery.MVVM.ViewModel
             set { 
                 _isViewVisible = value; 
                 OnPropertyChanged(nameof(IsViewVisible));
-
             }
         }
 
@@ -59,7 +58,6 @@ namespace PizzaDelivery.MVVM.ViewModel
         {
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-
         }
 
         private bool CanExecuteLoginCommand (object obj)

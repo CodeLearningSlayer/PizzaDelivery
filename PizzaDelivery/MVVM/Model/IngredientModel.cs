@@ -58,6 +58,8 @@ namespace PizzaDelivery.MVVM.Model
             }
         }
 
+        public IngredientModel() { }
+
         public IngredientModel(Ingredient ingredient)
         {
             ID = ingredient.Ingredient_code;

@@ -13,17 +13,22 @@ namespace PizzaDelivery.MVVM.ViewModel
     public class CreatePizzaViewModel : ViewModelBase
     {
         private readonly IngredientService _ingredientsService = new IngredientService();
+        private readonly PizzaService _pizzaService = new PizzaService();
         public ObservableCollection<IngredientModel> CurrentCollection { get; set; }
+        public ObservableCollection<IngredientModel> IngredientsToCreate { get; set; }
         public IngredientModel SelectedIngredient { get; set; }
         public int CurrentIngredientQuantity { get; set; }
         public ObservableCollection<IngredientModel> AllIngredients { get; set; }
 
-        public isPossibleToAdd
+        public int TotalSum { get; set; }
+
+        public bool isPossibleToAdd = false;
         
 
         private void GetAvailableIngredients()
         {
             AllIngredients = new ObservableCollection<IngredientModel>(_ingredientsService.GetIngredients());
+            IngredientsToCreate = new ObservableCollection<IngredientModel>();
 
             foreach (var ingredient in AllIngredients)
             {
@@ -34,10 +39,15 @@ namespace PizzaDelivery.MVVM.ViewModel
             OnPropertyChanged(nameof(AllIngredients));
         }
 
+        
 
         public ICommand ShowAvailableIngredients { get; }
         public ICommand AddIngredientCommand { get; }
         public ICommand SubtractIngredientCommand { get; }
+        
+        public ICommand SetIngredientNum { get; }
+
+        public ICommand ChangeSelectedIngredient { get; }
 
         public CreatePizzaViewModel()
         {
@@ -47,7 +57,8 @@ namespace PizzaDelivery.MVVM.ViewModel
             ShowAvailableIngredients = new ViewModelCommand(ExecuteShowAvailableIngredientsCommand);
             AddIngredientCommand = new ViewModelCommand(ExecuteAddIngredientCommand);
             SubtractIngredientCommand = new ViewModelCommand(ExecuteSubtractIngredientCommand);
-
+            ChangeSelectedIngredient = new ViewModelCommand(ExecuteChangeSelectedIngredient);
+            SetIngredientNum = new ViewModelCommand(ExecuteSetIngredientNumCommand);
             ExecuteShowAvailableIngredientsCommand(null);
         }
 
@@ -60,14 +71,44 @@ namespace PizzaDelivery.MVVM.ViewModel
 
         public void ExecuteAddIngredientCommand(object obj) // забирать выбранный ингредиент
         {
-            CurrentIngredientQuantity += 1;
+            if (SelectedIngredient != null && CurrentIngredientQuantity < SelectedIngredient.Quantity)
+                CurrentIngredientQuantity += 1;
             OnPropertyChanged(nameof(CurrentIngredientQuantity));
         }
         public void ExecuteSubtractIngredientCommand(object obj)
         {
-            if (CurrentIngredientQuantity > 0)
+            if (CurrentIngredientQuantity > 0 && SelectedIngredient != null)
                 CurrentIngredientQuantity -= 1;
+
             OnPropertyChanged(nameof(CurrentIngredientQuantity));
+        }
+
+        public void ExecuteChangeSelectedIngredient(object obj)
+        {
+            CurrentIngredientQuantity = 0;
+            OnPropertyChanged(nameof(CurrentIngredientQuantity));
+        }
+
+        public void ExecuteSetIngredientNumCommand(object obj)
+        {
+            var newIngredient = new IngredientModel()
+            {
+                ID = SelectedIngredient.ID,
+                Cost = SelectedIngredient.Cost,
+                Quantity = CurrentIngredientQuantity,
+                Name = SelectedIngredient.Name
+            };
+            if (!IngredientsToCreate.Where(i => i.ID == newIngredient.ID).Any())
+                IngredientsToCreate.Add(newIngredient);
+            else
+            {
+                var existingIngredient = IngredientsToCreate.Where(i => i.ID == newIngredient.ID).Single();
+                existingIngredient.Quantity = newIngredient.Quantity;
+            }
+            TotalSum = _pizzaService.GetPriceByIngredients(IngredientsToCreate);
+            OnPropertyChanged(nameof(IngredientsToCreate));
+            OnPropertyChanged(nameof(TotalSum));
+
         }
 
     }
