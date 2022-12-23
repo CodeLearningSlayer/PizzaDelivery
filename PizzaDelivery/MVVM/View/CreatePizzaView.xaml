@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="PizzaDelivery.MVVM.View.CreatePizzaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:PizzaDelivery.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewModel:CreatePizzaViewModel}"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             
+             xmlns:local="clr-namespace:PizzaDelivery.MVVM.View" xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+   
+
+    <Grid Background="#EBB84B">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+
+        
+        <ListView ItemsSource="{Binding Path=CurrentCollection}" Margin="15"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedIngredient}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="160" Header="Название">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="160" Header="Цена">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Cost}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="160" Header="Количество">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Quantity}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+                <col:ArrayList x:Key="Ingredients">
+                    
+                </col:ArrayList>
+            </ListView.Resources>
+        </ListView>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
+            <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AddIngredientCommand}" Width="170">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock FontSize="25" FontWeight="Bold" Foreground="White" Margin="0 0 20 0">Добавить</TextBlock>
+                    <fa:IconImage Icon="SquarePlus" Width="25" Height="25" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <TextBlock Text="{Binding CurrentIngredientQuantity}" FontSize="20" Foreground="White" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
+            <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding SubtractIngredientCommand}" Width="170">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock FontSize="25" FontWeight="Bold" Foreground="White" Margin="0 0 10 0">Убрать</TextBlock>
+                <fa:IconImage Icon="SquareMinus" Width="25" Height="25" Foreground="White"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="15 0 0 0">Итоговая пицца</TextBlock>
+        <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="15"></DataGrid>
+        
+        
+        
+    </Grid>
+
+    
+
+</UserControl>
