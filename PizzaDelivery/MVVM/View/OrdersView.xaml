@@ -6,9 +6,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PizzaDelivery.MVVM.View"
+             xmlns:viewModel ="clr-namespace:PizzaDelivery.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewModel:HomeViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+    
     <Grid Background="#EBB84B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,7 +35,15 @@
 
         </Button>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="pizzaDataGrid">
+        <DataGrid 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2" 
+            RowStyle="{DynamicResource DataGridRowStyle1}" 
+            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+            CellStyle="{DynamicResource DataGridCellStyle1}" 
+            x:Name="pizzaDataGrid"
+            ItemsSource="{Binding AllPizza}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
                     <DataGridCheckBoxColumn.HeaderTemplate>
@@ -42,7 +55,7 @@
 
                 <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False"/>
 
-                <DataGridTemplateColumn Header="Название" IsReadOnly="True" Width="*">
+                <!--<DataGridTemplateColumn Header="Название" IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -53,11 +66,11 @@
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
 
-                <DataGridTextColumn Header="Тип" IsReadOnly="True" Width="*"/>
+                <!--<DataGridTextColumn Header="Тип" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Цена" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Количество" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Количество" IsReadOnly="True" Width="*"/>-->
 
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>

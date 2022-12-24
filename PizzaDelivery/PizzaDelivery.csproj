@@ -85,7 +85,9 @@
     <Compile Include="MVVM\CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Model\IngredientsListModel.cs" />
     <Compile Include="MVVM\Model\IUserRepository.cs" />
+    <Compile Include="MVVM\Model\LineOfOrderModel.cs" />
     <Compile Include="MVVM\Model\UserAccountModel.cs" />
     <Compile Include="MVVM\Model\UserModel.cs" />
     <Compile Include="MVVM\Repositories\RepositoryBase.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="MVVM\ViewModel\CreatePizzaViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CustomerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LineOfOrderViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ReportsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UserViewModel.cs" />
@@ -114,6 +117,7 @@
     </Compile>
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\IngredientService.cs" />
+    <Compile Include="Services\LineOfOrderService.cs" />
     <Compile Include="Services\OrderServjce.cs" />
     <Compile Include="Services\PizzaService.cs" />
     <Page Include="MVVM\CustomControls\BindablePasswordBox.xaml">
@@ -229,16 +233,16 @@
     <Resource Include="Images\whity.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\1.png" />
+    <Resource Include="Images\Barbecue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\2.png" />
-    <Resource Include="Images\3.png" />
-    <Resource Include="Images\4.png" />
-    <Resource Include="Images\5.png" />
-    <Resource Include="Images\6.png" />
-    <Resource Include="Images\7.png" />
-    <Resource Include="Images\8.png" />
+    <Resource Include="Images\Cheese.png" />
+    <Resource Include="Images\Ham.png" />
+    <Resource Include="Images\Salyami.png" />
+    <Resource Include="Images\Mushrooms.png" />
+    <Resource Include="Images\Tomato.png" />
+    <Resource Include="Images\Chorizo.png" />
+    <Resource Include="Images\Pesto.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="8.png" />

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using PizzaDelivery.MVVM.Model;
 using PizzaDelivery.Services;
+using System.Windows;
 
 namespace PizzaDelivery.MVVM.ViewModel
 {
@@ -39,12 +40,12 @@ namespace PizzaDelivery.MVVM.ViewModel
             OnPropertyChanged(nameof(AllIngredients));
         }
 
-        
 
         public ICommand ShowAvailableIngredients { get; }
         public ICommand AddIngredientCommand { get; }
         public ICommand SubtractIngredientCommand { get; }
         
+        public ICommand SetChosenIngredientCommand { get; }
         public ICommand SetIngredientNum { get; }
 
         public ICommand ChangeSelectedIngredient { get; }
@@ -59,6 +60,7 @@ namespace PizzaDelivery.MVVM.ViewModel
             SubtractIngredientCommand = new ViewModelCommand(ExecuteSubtractIngredientCommand);
             ChangeSelectedIngredient = new ViewModelCommand(ExecuteChangeSelectedIngredient);
             SetIngredientNum = new ViewModelCommand(ExecuteSetIngredientNumCommand);
+            SetChosenIngredientCommand = new ViewModelCommand(ExecuteSetChosenIngredientCommand);
             ExecuteShowAvailableIngredientsCommand(null);
         }
 
@@ -109,6 +111,16 @@ namespace PizzaDelivery.MVVM.ViewModel
             OnPropertyChanged(nameof(IngredientsToCreate));
             OnPropertyChanged(nameof(TotalSum));
 
+        }
+
+        public void ExecuteSetChosenIngredientCommand(object obj)
+        {
+            _pizzaService.CreatePizzaFromIngredients(IngredientsToCreate, TotalSum);
+            _ingredientsService.EditIngredientNum(IngredientsToCreate);
+
+            MessageBox.Show("Добавление успешно");
+
+            OnPropertyChanged(nameof(AllIngredients));
         }
 
     }

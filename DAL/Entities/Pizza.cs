@@ -9,12 +9,15 @@ namespace DAL.Entities
     [Table("Pizza")]
     public partial class Pizza
     {
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pizza()
         {
             Ingredients = new HashSet<Ingredients>();
             Line_of_order = new HashSet<Line_of_order>();
         }
+        public string Photo { get; set; }
 
         public double Pizza_price { get; set; }
 

@@ -13,6 +13,8 @@ namespace DAL.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Quantity_of_pizza { get; set; }
 
+        public int Line_id { get; set; }
+
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

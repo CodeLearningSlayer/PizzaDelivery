@@ -1,10 +1,15 @@
-﻿using System;
+﻿using DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PizzaDelivery.MVVM.Model
 {
@@ -15,6 +20,7 @@ namespace PizzaDelivery.MVVM.Model
         private int id;
         private bool type;
         private bool isAvailable;
+        private string _imageSource;
 
         public int ID
         {
@@ -36,6 +42,16 @@ namespace PizzaDelivery.MVVM.Model
             }
         }
 
+       
+        public string ImageToShow
+        {
+            get => _imageSource;
+            set
+            {
+                _imageSource = value;
+                OnPropertyChanged(nameof(ImageToShow));
+            }
+        }
         public bool IsAvailable
         {
             get { return isAvailable; }
@@ -56,6 +72,11 @@ namespace PizzaDelivery.MVVM.Model
             }
         }
 
+        public string strPrice
+        {
+            get { return price + " руб."; }
+        }
+
         public string Type
         {
             get { return type == true ? "Ready" : "SelfMade"; }
@@ -64,6 +85,17 @@ namespace PizzaDelivery.MVVM.Model
                 type = value == "Ready" ? true : false;
                 OnPropertyChanged(nameof(Type));
             }
+        }
+
+        public PizzaModel() { }
+        public PizzaModel(Pizza pizza)
+        {
+            ID = pizza.Pizza_id;
+            Price = (int)pizza.Pizza_price;
+            Type = pizza.Pizza_type;
+            IsAvailable = pizza.isAvalaible;
+            ImageToShow = pizza.Photo;
+            Name = pizza.Pizza_name;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

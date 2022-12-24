@@ -17,7 +17,7 @@ namespace PizzaDelivery
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            var loginView = new MainWindow();
+            var loginView = new Login();
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
               {

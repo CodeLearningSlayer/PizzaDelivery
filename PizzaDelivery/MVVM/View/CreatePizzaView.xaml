@@ -69,16 +69,16 @@
         <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
             <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AddIngredientCommand}" Width="170">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock FontSize="25" FontWeight="Bold" Foreground="White" Margin="0 0 20 0">Добавить</TextBlock>
+                    
                     <fa:IconImage Icon="SquarePlus" Width="25" Height="25" Foreground="White"/>
                 </StackPanel>
             </Button>
             <TextBlock Text="{Binding CurrentIngredientQuantity}" FontSize="20" Foreground="White" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
             <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding SubtractIngredientCommand}" Width="170">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock FontSize="25" FontWeight="Bold" Foreground="White" Margin="0 0 10 0">Убрать</TextBlock>
+                
+                    
                 <fa:IconImage Icon="SquareMinus" Width="25" Height="25" Foreground="White"/>
-                </StackPanel>
+
             </Button>
         </StackPanel>
 
@@ -98,7 +98,7 @@
             </TextBlock>
             <TextBlock Text="{Binding TotalSum}" FontSize="20" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center">
             </TextBlock>
-            <Button Style="{StaticResource pizzaItemButton}" Width="200" Height="30" Margin="15 50 15 0">
+            <Button Style="{StaticResource pizzaItemButton}" Width="200" Height="30" Margin="15 50 15 0" Command="{Binding SetChosenIngredientCommand}">
                 Добавить к заказу
             </Button>
             

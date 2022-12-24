@@ -49,9 +49,15 @@ namespace PizzaDelivery.Services
                 Order_sum = order.OrderSum,
                 Courier_id = order.CourierID,
                 Employee_code = order.EmployeeID,
+                
             };
             db.Order.Add(o);
             db.SaveChanges();
+        }
+
+        internal void AddToOrder(PizzaModel selectedPizza)
+        {
+            
         }
 
         public void DeleteOrder(OrderModel order)

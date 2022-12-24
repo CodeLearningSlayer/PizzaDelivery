@@ -24,7 +24,7 @@ namespace PizzaDelivery.MVVM.View
         public CreatePizzaView()
         {
             InitializeComponent();
-            this.DataContext = new CreatePizzaViewModel();
+            //this.DataContext = new CreatePizzaViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

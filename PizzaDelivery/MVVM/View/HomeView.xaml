@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PizzaDelivery.MVVM.View"
+             xmlns:viewModel ="clr-namespace:PizzaDelivery.MVVM.ViewModel"
+             xmlns:local="clr-namespace:PizzaDelivery.MVVM.View" d:DataContext="{d:DesignInstance Type=viewModel:HomeViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#EBB84B">
@@ -12,14 +13,49 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DockPanel HorizontalAlignment="Center" Grid.Row="0">
-            <StackPanel Style="{StaticResource pizzaItemStyle}" >
+        <ListBox Grid.Row="0" Grid.RowSpan="2"
+            x:Name="PizzaListBox"
+            ItemsSource="{Binding ReadyPizza}"
+            SelectedItem="{Binding SelectedPizza}"
+            Background="Transparent"
+            
+                 >
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                 
+                    <StackPanel Margin="25">
+                        
+                            <Image Source="{Binding ImageToShow}" Width="140" Height="140" Margin="20"/>
+                            <TextBlock Style="{StaticResource pizzaItemName}"   HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Name}"/>
+                        
+                        
+                        <TextBlock Style="{StaticResource pizzaItemPrice}" Text="{Binding strPrice}" VerticalAlignment="Center" />
+                        <Button Style="{StaticResource pizzaItemButton}" Content="Выбрать" Command="{Binding ChoosePizza}" Margin="0 0 0 15"/>
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+
+
+        </ListBox>
+
+        
+
+        <!--<DockPanel HorizontalAlignment="Center" Grid.Row="0">
+            --><!--<StackPanel Style="{StaticResource pizzaItemStyle}" >
                 <Image Source="../../Images/1.png" Width="140" Height="140"/>
-                <TextBlock Style="{StaticResource pizzaItemName}" Text="Цыпленок карри"/>
+                <TextBlock Style="{StaticResource pizzaItemName}" Text="{Binding Name}"/>
                 <TextBlock Style="{StaticResource pizzaItemPrice}" Text="от 469 руб."/>
                 <Button Style="{StaticResource pizzaItemButton}" Content="Выбрать"/>
 
-            </StackPanel>
+            </StackPanel>--><!--
 
             <StackPanel Style="{StaticResource pizzaItemStyle}">
                 <Image Source="../../Images/2.png" Width="140" Height="140"/>
@@ -79,7 +115,7 @@
 
             </StackPanel>
 
-        </DockPanel>
+        </DockPanel>-->
 
     </Grid>
 
